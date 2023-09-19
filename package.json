@@ -1,15 +1,19 @@
 {
-  "name": "app",
-  "version": "1.0.50",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
-  },
-  "dependencies": {
-    "elysia": "latest"
-  },
+  "name": "bun-fullstack-app",
+  "version": "1.0.0",
+  "workspaces": [
+    "client/*",
+    "server/*"
+  ],
   "devDependencies": {
-    "bun-types": "latest"
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "concurrently": "^8.2.1",
+    "eslint": "^8.49.0"
   },
-  "module": "src/index.js"
+  "scripts": {
+    "dev": "concurrently \"bun run dev:auth\" \"bun run dev:app\"",
+    "dev:app": "cd client/app && bun run dev",
+    "dev:auth": "cd server/auth && bun run dev"
+  }
 }
